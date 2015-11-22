@@ -1,0 +1,39 @@
+{% load staticfiles %}
+{% include 'app/head_css.html' %}
+{% include 'app/nav.html' %}
+
+{% block content %}
+
+{% endblock %}
+
+
+Testing... it Worked
+<div class="dropdown">
+	
+<form id="FORM_ID" action="{% url app:catchparams state %}" method="get">
+{% csrf_token %}
+
+<select id="item_id" name="state">
+{% for entry in states %}
+    <option value="{{ entry.id }}">{{ entry }}</option>
+
+{% endfor %}
+
+</select >
+
+
+<select id="item_id2" name="skill">
+{% for entry in skills %}
+    <option value="{{ entry.id }}">{{ entry }}</option>
+
+{% endfor %}
+</select>
+
+<input type="submit" value="label">
+</form>
+
+</div>
+
+
+
+

@@ -1,0 +1,53 @@
+{% load staticfiles %}
+{% include 'app/head_css.html' %}
+{% include 'app/nav.html' %}
+
+{% block content %}
+
+{% endblock %}
+
+Testing... it Worked
+<div class="dropdown">
+	
+<form id="FORM_ID" method="DEFAULT_ACTION">
+<select id="item_id">
+{% for entry in states %}
+    <option value="{{ entry.id }}">{{ entry }}</option>
+
+{% endfor %}
+</select>
+</form>
+
+<form id="FORM_ID2" method="DEFAULT_ACTION">
+<select id="item_id2">
+{% for entry in skills %}
+    <option value="{{ entry.id }}">{{ entry }}</option>
+
+{% endfor %}
+</select>
+</form>
+
+</div>
+
+<button onclick='goto()'>Go</button>
+
+<script type="text/javascript">
+// document.getElementById('FORM_ID').onchange = function(){
+//     document.getElementById('item_id').action = '/'+this.value;
+// }
+function goto() {
+	document.location.href = document.getElementById('item_id').value;
+
+//     var selection = document.getElementById('item_id').value;
+//     if (selection != 'All') {
+//         //window.location = "http://www.example.com/"+selection;
+//         document.location.href = "http://127.0.0.1:8000/candidate/"; + selection);
+//     } else {
+//         alert("Error: You must pick something");
+//     }
+}
+
+</script>
+
+
+
