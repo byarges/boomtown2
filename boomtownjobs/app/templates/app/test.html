@@ -10,21 +10,24 @@
 Testing... it Worked
 <div class="dropdown">
 	
-<form id="FORM_ID" action="{% url app:catchparams state %}" method="get">
+<form action="{% url 'app:catchparams' %}" method="get">
+
+
+
 {% csrf_token %}
 
-<select id="item_id" name="state">
-{% for entry in states %}
-    <option value="{{ entry.id }}">{{ entry }}</option>
+<select id="state_id" name="state_id">
+{% for state in states %}
+    <option value="{{ state }}">{{ state }}</option>
 
 {% endfor %}
 
 </select >
 
 
-<select id="item_id2" name="skill">
-{% for entry in skills %}
-    <option value="{{ entry.id }}">{{ entry }}</option>
+<select id="skill_id" name="skill_id">
+{% for skill in skills %}
+    <option value="{{ skill }}">{{ skill }}</option>
 
 {% endfor %}
 </select>

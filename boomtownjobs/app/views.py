@@ -49,7 +49,10 @@ def candidatequery(request, pk):
 
 def catchparams(request):
 
-    query = Company.objects.filter(location__state__iexact='WA').filter(skill__skill__iexact='Concrete') 
+    state = request.GET.get("state_id")
+    skill = request.GET.get("skill_id")
+
+    query = Company.objects.filter(location__state__iexact=state).filter(skill__skill__iexact=skill) 
 
     return render_to_response ('app/test2.html', {'query':query}, context_instance =  RequestContext(request))
 
