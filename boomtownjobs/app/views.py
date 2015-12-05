@@ -52,7 +52,15 @@ def catchparams(request):
     state = request.GET.get("state_id")
     skill = request.GET.get("skill_id")
 
-    query = Company.objects.filter(location__state__iexact=state).filter(skill__skill__iexact=skill) 
+
+    try:
+
+        query = Company.objects.filter(location__state__iexact=state).filter(skill__skill__iexact=skill).values_list('company_name', flat=True)
+       
+    
+    except(KeyError, Company.DoesNotExist):
+        query = "No Matches"
+    
 
     return render_to_response ('app/test2.html', {'query':query}, context_instance =  RequestContext(request))
 
