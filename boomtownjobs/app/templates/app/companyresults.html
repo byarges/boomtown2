@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<body>
+
+{% include 'app/head_css.html' %}
+{% include 'app/nav.html' %}
+
+{% block content %}
+
+{% endblock %}
+
+
+
+
+ <div class="container">
+ <h1>Results</h1>
+
+{% for company in query %}
+
+<li>
+ <h4><a href="{% url 'app:companydetail' company.id %}">{{ company.company_name }}</a>  <h4>
+
+</li>
+
+{% endfor %}
+
+
+</div>
+
+</body>
+</html>

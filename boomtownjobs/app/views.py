@@ -2,6 +2,9 @@ from django.shortcuts import render, render_to_response, RequestContext
 
 from django.http import HttpResponse
 
+from django.shortcuts import get_object_or_404, render
+
+
 from random import randrange
 from .models import *
 from django import forms
@@ -28,40 +31,30 @@ def candidatepage(request):
 	
     state = Location.objects.all()
     skill = Skill.objects.all()
-    # form = request.POST
-    
-    # if request.method == 'POST':
-    #   selected_item = get_object_or_404(Item, pk=request.POST.get('item_id'))
-    #   # get the user you want (connect for example) in the var "user"
-    #   # item = selected_item
-    #   # save()
-    return render_to_response ('app/test.html', {'states':state, 'skills':skill}, context_instance =  RequestContext(request),)  
 
-    # return render(request, 'app/test.html')
+    return render_to_response ('app/candidatepage.html', {'states':state, 'skills':skill}, context_instance =  RequestContext(request),)  
 
 
-
-def candidatequery(request, pk):
-    query = Company.objects.filter(location__state__iexact='WA').filter(skill__skill__iexact='Concrete')
-
-
-    return render_to_response ('app/test2.html', {'query':query}, context_instance =  RequestContext(request))
-
-def catchparams(request):
+def companyresults(request):
 
     state = request.GET.get("state_id")
     skill = request.GET.get("skill_id")
 
 
+
     try:
 
-        query = Company.objects.filter(location__state__iexact=state).filter(skill__skill__iexact=skill).values_list('company_name', flat=True)
-       
+        query = Company.objects.filter(location__state__iexact=state).filter(skill__skill__iexact=skill)
     
     except(KeyError, Company.DoesNotExist):
         query = "No Matches"
     
 
-    return render_to_response ('app/test2.html', {'query':query}, context_instance =  RequestContext(request))
+    return render_to_response ('app/companyresults.html', {'query':query}, context_instance =  RequestContext(request))
 
+
+def companydetail(request, pk):
+    chosencompany = Company.objects.get(id=pk)
+
+    return render_to_response ('app/companydetail.html', {'company':chosencompany})
 

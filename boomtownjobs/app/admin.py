@@ -8,8 +8,11 @@ class CompanyAdmin(admin.ModelAdmin):
 class CandidateAdmin(admin.ModelAdmin):
     fields = ['first_name', 'last_name', 'location', 'skill']
 
+
+
 admin.site.register(Candidate, CandidateAdmin)
 admin.site.register(Company, CompanyAdmin)
+
 
 admin.site.register(Skill)
 admin.site.register(Location)
