@@ -3,7 +3,7 @@ from django.contrib import admin
 from .models import *
 
 class CompanyAdmin(admin.ModelAdmin):
-    fields = ['company_name', 'location', 'skill']
+    fields = ['company_name', 'location', 'skill', 'phone_number', 'nonvalidatedaddress', 'description', 'email']
 
 class CandidateAdmin(admin.ModelAdmin):
     fields = ['first_name', 'last_name', 'location', 'skill']

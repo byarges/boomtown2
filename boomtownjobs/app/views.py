@@ -1,14 +1,17 @@
 from django.shortcuts import render, render_to_response, RequestContext
+from django.shortcuts import get_object_or_404, render, redirect
+
 
 from django.http import HttpResponse
 
-from django.shortcuts import get_object_or_404, render
 
 
 from random import randrange
 from .models import *
 from django import forms
 from django.db import models
+
+from .forms import CompanyForm
 
 import logging
 
@@ -20,11 +23,17 @@ def signin(request):
    
     return render(request, 'app/signin.html')
 
-def companypage(request):
-    state = Location.objects.all()
-    skill = Skill.objects.all()
+def employerpage(request):
+    if request.method == "POST":
+        form = CompanyForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('/companydetail/%d' % post.pk)
+    else:
+        form = CompanyForm()
 
-    return render_to_response ('app/candidate.html', {'states':state, 'skills':skill}, context_instance =  RequestContext(request),)
+    return render(request, 'app/employerpage.html', {'form': form})
 
 def candidatepage(request):
 

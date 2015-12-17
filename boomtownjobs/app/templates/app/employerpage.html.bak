@@ -1,5 +1,4 @@
 {% load staticfiles %}
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,30 +16,46 @@
 
   </head>
 
-
-
-
-
 {% include 'app/nav.html' %}
 
-{% block content %}
-
-{% endblock %}
-
-
-<h1>{{ company }}</h1>
-<h3>Has an immediate opening for your {{ company.skill }} experience! </h3>
-
-<h4> Located in the state of {{ company.location }} </h4>
-<h4>{{ company.nonvalidatedaddress }}</h4>
-<h4>Phone Number: {{ company.phone_number }} </h4>
-<h4>Email: {{ company.email }} </h4>
-
-<h3>About {{ company }}:</h3>
-<p> {{ company.description }}</p>
+{% csrf_token %}
 
 
 
-    {% include 'app/javascript.html' %}
+<form>
+  Name of company:<br>
+  <input type="text" name="firstname">
+  <br>
+  Location:<br>
+  
+</form>
+
+<select id="state_id" name="state_id">
+{% for state in states %}
+    <option value="{{ state }}">{{ state }}</option>
+
+{% endfor %}
+
+</select >
+
+<br>
+<br>
+
+Skill:
+<br>
+<select id="skill_id" name="skill_id">
+{% for skill in skills %}
+    <option value="{{ skill }}">{{ skill }}</option>
+
+{% endfor %}
+</select>
+<br>
+<br>
+
+
+
+<input type="submit" value="Submit">
+
+</select >
 
 </html>

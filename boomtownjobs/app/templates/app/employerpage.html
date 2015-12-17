@@ -1,5 +1,4 @@
 {% load staticfiles %}
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,30 +16,17 @@
 
   </head>
 
-
-
-
-
 {% include 'app/nav.html' %}
 
+{% csrf_token %}
+
+
+
+
 {% block content %}
-
+    <h1>New Company</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
 {% endblock %}
-
-
-<h1>{{ company }}</h1>
-<h3>Has an immediate opening for your {{ company.skill }} experience! </h3>
-
-<h4> Located in the state of {{ company.location }} </h4>
-<h4>{{ company.nonvalidatedaddress }}</h4>
-<h4>Phone Number: {{ company.phone_number }} </h4>
-<h4>Email: {{ company.email }} </h4>
-
-<h3>About {{ company }}:</h3>
-<p> {{ company.description }}</p>
-
-
-
-    {% include 'app/javascript.html' %}
-
-</html>
