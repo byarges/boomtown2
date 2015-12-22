@@ -8,6 +8,8 @@ urlpatterns = [
     url(r'^employerpage/$', views.employerpage, name='employerpage'),    
     url(r'^companyresults/$', views.companyresults, name='companyresults'),
     url(r'^companydetail/(?P<pk>[0-9]+)/$', views.companydetail, name='companydetail'),
+    url(r'^auth/$', views.auth, name='auth'),
+
 
 
 

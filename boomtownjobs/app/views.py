@@ -15,6 +15,11 @@ from .forms import CompanyForm
 
 import logging
 
+from django.contrib.auth.decorators import login_required
+
+from django.contrib.auth import authenticate, login
+
+
 def index(request):
    
     return render(request, 'app/index.html')
@@ -23,6 +28,7 @@ def signin(request):
    
     return render(request, 'app/signin.html')
 
+@login_required(login_url='/signin/')
 def employerpage(request):
     if request.method == "POST":
         form = CompanyForm(request.POST)
@@ -35,6 +41,7 @@ def employerpage(request):
 
     return render(request, 'app/employerpage.html', {'form': form})
 
+@login_required(login_url='/signin/')
 def candidatepage(request):
 
 	
@@ -67,3 +74,20 @@ def companydetail(request, pk):
 
     return render_to_response ('app/companydetail.html', {'company':chosencompany})
 
+
+# User Authentication
+def auth(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            # Redirect to a success page.
+            return render_to_response ('app/authtrue.html')
+        else:
+            # Return a 'disabled account' error message
+            return render_to_response ('app/authenticate.html')
+    else:
+        # Return an 'invalid login' error message.
+        return render_to_response ('app/authenticate.html')
